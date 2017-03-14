@@ -1,5 +1,13 @@
-set -xg PATH /opt/local/bin /opt/local/sbin $PATH
-set -xg PATH $PATH /Users/yury/dev/sys-venvs/fish/bin
+if test -n "$VIRTUAL_ENV"
+  # Make sure that venv/bin is always first in the $PATH
+  set -xg PATH $VIRTUAL_ENV/bin $PATH
+
+  # Set __PYVENV_LAUNCHER__ to the proper, local for the virtual env, python.
+  set -xg __PYVENV_LAUNCHER__ (which python)
+else
+  set -xg PATH /opt/local/bin /opt/local/sbin $PATH
+  set -xg PATH $PATH /Users/yury/dev/sys-venvs/fish/bin
+end
 
 set -xg WORKON_HOME $HOME/dev/venvs
 
@@ -44,9 +52,4 @@ function p
 end
 
 source ~/.config/fish/theme.fish
-
-if test -n "$VIRTUAL_ENV"
-  # Set __PYVENV_LAUNCHER__ to the proper, local for the virtual env, python.
-  set -xg __PYVENV_LAUNCHER__ (which python)
-end
 
