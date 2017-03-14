@@ -45,3 +45,8 @@ end
 
 source ~/.config/fish/theme.fish
 
+if test -n "$VIRTUAL_ENV"
+  # Set __PYVENV_LAUNCHER__ to the proper, local for the virtual env, python.
+  set -xg __PYVENV_LAUNCHER__ (which python)
+end
+

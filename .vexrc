@@ -1,4 +1,1 @@
 shell=/opt/local/bin/fish
-env:
-	__PYVENV_LAUNCHER__=;
-
