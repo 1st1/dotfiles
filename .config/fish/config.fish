@@ -25,6 +25,10 @@ set __fish_git_prompt_color_branch yellow
 set __fish_git_prompt_color_upstream_ahead green
 set __fish_git_prompt_color_upstream_behind resh enad
 
+if type -q "hub"
+  alias git=hub
+end
+
 function fish_prompt
   set last_status $status
 
