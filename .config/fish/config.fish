@@ -5,8 +5,11 @@ if test -n "$VIRTUAL_ENV"
   # Set __PYVENV_LAUNCHER__ to the proper, local for the virtual env, python.
   set -xg __PYVENV_LAUNCHER__ (which python)
 else
-  set -xg PATH /opt/local/bin /opt/local/sbin $PATH
-  set -xg PATH $PATH /Users/yury/dev/sys-venvs/fish/bin
+  if test -d "/opt/local/bin"
+    # MacPorts
+    set -xg PATH /opt/local/bin /opt/local/sbin $PATH
+  end
+  set -xg PATH $PATH ~/dev/sys-venvs/fish/bin
 end
 
 set -xg WORKON_HOME $HOME/dev/venvs
