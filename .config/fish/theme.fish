@@ -3,7 +3,7 @@ set __fish_init_2_3_0 \x1d
 set fish_color_autosuggestion 969896
 set fish_color_command c397d8
 set fish_color_comment e7c547
-set fish_color_cwd green
+set fish_color_cwd e78c45
 set fish_color_cwd_root red
 set fish_color_end c397d8
 set fish_color_error d54e53

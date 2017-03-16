@@ -34,14 +34,15 @@ function fish_prompt
 
   if test -n "$VIRTUAL_ENV"
     set -l ve_tag (basename "$VIRTUAL_ENV")
-    echo -n (set_color B69)"{$ve_tag} "(set_color normal)
+    echo -sn (set_color B69) "{$ve_tag} " (set_color normal)
   end
 
   set_color $fish_color_cwd
   printf '%s' (prompt_pwd)
   set_color normal
 
-  printf '%s » ' (__fish_git_prompt)
+  printf '%s ' (__fish_git_prompt)
+  echo -sn (set_color 888) '» '
 
   set_color normal
 end
