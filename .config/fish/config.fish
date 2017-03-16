@@ -58,3 +58,7 @@ end
 
 source ~/.config/fish/theme.fish
 
+if test -e ~/.config/fish/local.fish
+  # For local modifications
+  source ~/.config/fish/local.fish
+end
