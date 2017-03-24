@@ -26,7 +26,11 @@ set -xg WORKON_HOME $HOME/dev/venvs
 
 set -xg MANPATH /opt/local/share/man $MANPATH
 
-set -xg EDITOR /usr/bin/vim
+if type -q /opt/local/bin/vim
+  set -xg EDITOR /opt/local/bin/vim
+else
+  set -xg EDITOR /usr/bin/vim
+end
 
 set -xg LSCOLORS gxfxcxdxbxegedabagacad
 set -xg CLICOLOR 1
