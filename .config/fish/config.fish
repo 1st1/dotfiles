@@ -73,52 +73,49 @@ function p
   ps aux | grep -i $argv
 end
 
+function vex
+  # Enhances 'vex' command with an '--wd' command option and
+  # returns you back to the dir you were working in before
+  # entering a venv.
+
+  # Use --wd within a virtual env to set a "home dir" for it.
+
+  if not type -f -q "vex"
+    echo "'vex' is missing."
+    echo "Make ~/dev/sys-venvs/fish venv and install vex there."
+    return 1
+  end
+
+  pushd $PWD
+
+  if test (count $argv) -eq 1
+    switch $argv[1]
+    case "--wd"
+      if test -z "$VIRTUAL_ENV"
+        echo "You must be in a virtual env to execute 'vex --wd'"
+        popd
+        return 1
+      else
+        echo $PWD >"$VIRTUAL_ENV/.wd"
+        popd
+        return 0
+      end
+    case "*"
+      set -l wd "$WORKON_HOME/"$argv[1]"/.wd"
+      if test -e $wd
+        read wd <$wd
+        cd $wd
+      end
+    end
+  end
+
+  command vex $argv
+  popd
+end
+
 source ~/.config/fish/theme.fish
 
 if test -e ~/.config/fish/local.fish
   # For local modifications
   source ~/.config/fish/local.fish
-end
-
-
-if not type -q "vex"
-  function vex
-    echo "Vex is missing."
-    echo "Make ~/dev/sys-venvs/fish venv and install vex there."
-    return 1
-  end
-else
-  function vex
-    # Enhances 'vex' command with an '--wd' command option and
-    # returns you back to the dir you were working in before
-    # entering a venv.
-
-    # Use --wd within a virtual env to set a "home dir" for it.
-
-    pushd $PWD
-
-    if test (count $argv) -eq 1
-      switch $argv[1]
-      case "--wd"
-        if test -z "$VIRTUAL_ENV"
-          echo "You must be in a virtual env to execute 'vex --wd'"
-          popd
-          return 1
-        else
-          echo $PWD >"$VIRTUAL_ENV/.wd"
-          popd
-          return 0
-        end
-      case "*"
-        set -l wd "$WORKON_HOME/"$argv[1]"/.wd"
-        if test -e $wd
-          read wd <$wd
-          cd $wd
-        end
-      end
-    end
-
-    command vex $argv
-    popd
-  end
 end
