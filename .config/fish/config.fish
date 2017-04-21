@@ -64,7 +64,18 @@ function fish_prompt
   set_color normal
 end
 
+if functions -q fish_user_key_bindings
+  # fisher defines its own 'fish_user_key_bindings' which we will
+  # shadow later. Save it as __overloaded_fish_user_key_bindings
+  # and call later in 'fish_user_key_bindings'.
+  functions -c fish_user_key_bindings __overloaded_fish_user_key_bindings
+end
+
 function fish_user_key_bindings
+  if functions -q __overloaded_fish_user_key_bindings
+    __overloaded_fish_user_key_bindings
+  end
+
   # clear command line on ^C
   bind \cc 'commandline ""'
 end
