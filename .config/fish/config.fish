@@ -22,6 +22,8 @@ else
   end
 end
 
+set -xg PATH $PATH $HOME/.bin
+
 set -xg WORKON_HOME $HOME/dev/venvs
 
 set -xg MANPATH /opt/local/share/man $MANPATH
