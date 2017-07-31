@@ -4,11 +4,11 @@ Shows git branches sorted by last commit date, noting when branch has been
 merged:
 
     $ git blast
-    * master 33 minutes ago
-      some-feature 4 days ago [M]
-      dev-branch 4 days ago
-      legacy-branch 5 days ago [M]
-      another-feature 4 months ago
+    * master           33 minutes ago       last commit message
+      some-feature     4 days ago      [M]  another commit message
+      dev-branch       4 days ago           wip
+      legacy-branch    5 days ago      [M]  a commit message
+      another-feature  4 months ago         test
 """
 
 # https://github.com/wolever/git-blast
@@ -43,33 +43,63 @@ merged:
 # either expressed or implied, of David Wolever.
 
 import subprocess as sp
+import sys
+
 
 def xcall(cmd):
-    return sp.check_output(cmd.split()).decode("utf-8")
+    return sp.check_output(cmd.split(), stderr=sp.STDOUT).decode("utf-8")
 
-C_GREEN = '\033[0;32m'
-# C_BLUE = '\033[0;34m'
-C_BLUE = '\033[38;5;185m'
-C_RESET = '\033[0;0m'
 
-cur_branch = xcall("git rev-parse --abbrev-ref HEAD").strip()
-merged_branches = set([
-    x.split()[-1] for x
-    in xcall("git branch --merged").splitlines()
-])
+color_current_branch = '\033[0;32m'
+color_merged_branch = '\033[0;32m'
+color_last_commit_ago = '\033[38;5;185m'
+color_reset = '\033[0;0m'
 
-by_date = xcall(
-    "git for-each-ref --sort=-committerdate refs/heads/ "
-    "--format=%(refname:short)%09%(committerdate:relative)"
-)
-for line in by_date.splitlines():
-    branch, _, date = line.partition("\t")
-    output = ""
-    if branch == cur_branch:
-        output += "* %s%s" %(C_GREEN, branch)
-    else:
-        output += "  %s" %(branch, )
-    output += " %s%s%s" %(C_BLUE, date, C_RESET)
-    if branch in merged_branches and branch != cur_branch:
-        output += " [%sM%s]" %(C_GREEN, C_RESET)
-    print(output)
+
+def main():
+    try:
+        cur_branch = xcall("git rev-parse --abbrev-ref HEAD").strip()
+    except sp.CalledProcessError as e:
+        print(e)
+        sys.exit(1)
+
+    merged_branches = set([
+        x.split()[-1] for x
+        in xcall("git branch --merged").splitlines()
+    ])
+
+    by_date = xcall(
+        "git for-each-ref --sort=-committerdate refs/heads/ "
+        "--format=%(refname:short)%09%(committerdate:relative)%09%"
+        "(contents:subject)"
+    )
+
+    table = []
+    for line in by_date.splitlines():
+        branch, date, message = line.split("\t")
+        table.append((branch, date, message))
+
+    lens = [max(len(row[i]) for row in table) for i in range(len(table[0]))]
+
+    for branch, date, message in table:
+        branch_d = branch.ljust(lens[0] + 1)
+        date_d = date.ljust(lens[1] + 1)
+
+        output = ""
+        if branch == cur_branch:
+            output += "* {}{}".format(color_current_branch, branch_d)
+        else:
+            output += "  {}".format(branch_d)
+
+        output += " {}{}{}".format(color_last_commit_ago, date_d, color_reset)
+        if branch in merged_branches and branch != cur_branch:
+            output += "[{}M{}]  ".format(color_merged_branch, color_reset)
+        else:
+            output += "     "
+
+        output += message
+        print(output)
+
+
+if __name__ == '__main__':
+    main()
