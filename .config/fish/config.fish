@@ -6,6 +6,9 @@ if test -n "$VIRTUAL_ENV"
   set -xg __PYVENV_LAUNCHER__ (which python)
 
   function fish_title
+    if test -n "$SSH_CLIENT" ;or test -n "$SSH_TTY"
+      echo -sn (hostname -s) ": "
+    end
     echo "{"(basename $VIRTUAL_ENV)"}" (prompt_pwd)
   end
 else
@@ -18,6 +21,9 @@ else
   end
 
   function fish_title
+    if test -n "$SSH_CLIENT" ;or test -n "$SSH_TTY"
+      echo -sn (hostname -s) ": "
+    end
     echo (prompt_pwd)
   end
 end
