@@ -51,6 +51,11 @@ end
 function fish_prompt
   set last_status $status
 
+  if test -n "$SSH_CLIENT" ;or test -n "$SSH_TTY"
+    set -l h_tag (hostname -s)
+    echo -sn (set_color 0CC) "$h_tag " (set_color 888) "« " (set_color normal)
+  end
+
   if test -n "$VIRTUAL_ENV"
     set -l ve_tag (basename "$VIRTUAL_ENV")
     echo -sn (set_color B69) "{$ve_tag} " (set_color normal)
