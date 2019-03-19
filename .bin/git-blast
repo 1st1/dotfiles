@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Shows git branches sorted by last commit date, noting when branch has been
 merged:
@@ -42,6 +42,7 @@ merged:
 # of the authors and should not be interpreted as representing official policies,
 # either expressed or implied, of David Wolever.
 
+import argparse
 import subprocess as sp
 import sys
 
@@ -56,7 +57,7 @@ color_last_commit_ago = '\033[38;5;185m'
 color_reset = '\033[0;0m'
 
 
-def main():
+def cmd_list():
     try:
         cur_branch = xcall("git rev-parse --abbrev-ref HEAD").strip()
     except sp.CalledProcessError as e:
@@ -99,6 +100,25 @@ def main():
 
         output += message
         print(output)
+
+
+def cmd_clear():
+    merged = xcall('git branch --merged')
+    merged = [m.strip() for m in merged.split('\n') if not m.startswith('*')]
+    merged = [m for m in merged if m and m != 'master']
+    xcall('git branch -d ' + ' '.join(merged))
+
+
+def main():
+    parser = argparse.ArgumentParser(prog='git blast')
+    parser.add_argument('action', default='list', type=str,
+                        choices={'list', 'clear'}, nargs='?')
+    args = parser.parse_args()
+
+    if args.action == 'list':
+        cmd_list()
+    elif args.action == 'clear':
+        cmd_clear()
 
 
 if __name__ == '__main__':
