@@ -1,0 +1,68 @@
+{
+  "workbench.colorTheme": "Chromodynamics",
+  "extensions.ignoreRecommendations": false,
+  "workbench.useExperimentalGridLayout": false,
+  "editor.fontFamily": "roboto mono",
+  "editor.minimap.enabled": false,
+  "editor.fontWeight": "500",
+  "workbench.fontAliasing": "antialiased",
+  "workbench.editor.closeEmptyGroups": false,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.rulers": [
+    80
+  ],
+  "terminal.integrated.shell.windows": "/bin/bash",
+  "terminal.integrated.shell.osx": "/opt/local/bin/fish",
+  "window.zoomLevel": 0,
+  "terminal.integrated.fontSize": 13,
+  "window.nativeFullScreen": false,
+  "window.restoreFullscreen": true,
+  "editor.lineHeight": 20,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.multiCursorModifier": "alt",
+  "editor.scrollbar.verticalScrollbarSize": 7,
+  "cSpell.includeRegExpList": [
+    "CStyleComment"
+  ],
+  "editor.folding": false,
+  "cSpell.userWords": [
+    "deque",
+    "polyfill",
+    "postgre",
+    "sql"
+  ],
+  "editor.renderIndentGuides": false,
+  "editor.wordBasedSuggestions": false,
+  "prettier.singleQuote": true,
+  "python.formatting.provider": "none",
+  "go.useLanguageServer": true,
+  "go.gopath": "/Users/yury/dev/edge/go",
+  "python.venvPath": "/Users/yury/dev/venvs/",
+  "search.location": "panel",
+  "workbench.panel.defaultLocation": "right",
+  "terminal.integrated.experimentalUseTitleEvent": true,
+  "editor.quickSuggestions": false,
+  "editor.tabCompletion": "on",
+  "customizeUI.activityBar": "bottom",
+  "customizeUI.titleBar": "inline",
+  "window.titleBarStyle": "native",
+  "workbench.editor.enablePreview": false,
+  "explorer.autoReveal": false,
+  "files.exclude": {
+    "**/.mypy_cache": true
+  },
+  "python.dataScience.sendSelectionToInteractiveWindow": false,
+  "python.dataScience.enableAutoMoveToNextCell": false,
+  "vscodeWorkspaceSwitcher.paths": [
+    "~/dev/vscode"
+  ],
+  "python.linting.mypyEnabled": true,
+  "editor.find.seedSearchStringFromSelection": false,
+  "editor.fontSize": 14,
+  "gitlens.advanced.telemetry.enabled": false,
+  "gitlens.views.lineHistory.enabled": false,
+  "gitlens.views.lineHistory.avatars": false,
+  "editor.codeLens": false,
+  "gitlens.currentLine.enabled": false
+}
