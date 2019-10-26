@@ -1,3 +1,5 @@
+set -xg GPG_TTY (tty)
+
 if test -n "$VIRTUAL_ENV"
   # Make sure that venv/bin is always first in the $PATH
   set -xg PATH $VIRTUAL_ENV/bin $PATH
@@ -97,6 +99,14 @@ function p
   ps aux | grep -i $argv
 end
 
+function cdc
+  if test -z "$_VIRTUAL_ENV_HOME"
+    cd
+  else
+    cd $_VIRTUAL_ENV_HOME
+  end
+end
+
 function vex
   # Enhances 'vex' command with an '--wd' command option and
   # returns you back to the dir you were working in before
@@ -109,6 +119,8 @@ function vex
     echo "Make ~/dev/sys-venvs/fish venv and install vex there."
     return 1
   end
+
+  set -l _OLD_VIRTUAL_ENV_HOME "$_VIRTUAL_ENV_HOME"
 
   pushd $PWD
 
@@ -128,6 +140,7 @@ function vex
       set -l wd "$WORKON_HOME/"$argv[1]"/.wd"
       if test -e $wd
         read wd <$wd
+        set -xg _VIRTUAL_ENV_HOME "$wd"
         cd $wd
       end
     end
@@ -135,6 +148,7 @@ function vex
 
   command vex $argv
   popd
+  set -xg _VIRTUAL_ENV_HOME "$_OLD_VIRTUAL_ENV_HOME"
 end
 
 source ~/.config/fish/theme.fish
