@@ -1,7 +1,7 @@
 {
   "workbench.colorTheme": "Chromodynamics",
   "extensions.ignoreRecommendations": false,
-  "workbench.useExperimentalGridLayout": false,
+  "workbench.useExperimentalGridLayout": true,
   "editor.fontFamily": "roboto mono",
   "editor.minimap.enabled": false,
   "editor.fontWeight": "500",
@@ -57,12 +57,13 @@
   "vscodeWorkspaceSwitcher.paths": [
     "~/dev/vscode"
   ],
-  "python.linting.mypyEnabled": true,
   "editor.find.seedSearchStringFromSelection": false,
-  "editor.fontSize": 14,
+  "editor.fontSize": 15,
   "gitlens.advanced.telemetry.enabled": false,
   "gitlens.views.lineHistory.enabled": false,
   "gitlens.views.lineHistory.avatars": false,
   "editor.codeLens": false,
-  "gitlens.currentLine.enabled": false
+  "gitlens.currentLine.enabled": false,
+  "editor.colorDecorators": false,
+  "workbench.editor.tabSizing": "shrink"
 }
