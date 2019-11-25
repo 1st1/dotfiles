@@ -1,5 +1,3 @@
-set __fish_init_2_39_8 \x1d
-set __fish_init_2_3_0 \x1d
 set fish_color_autosuggestion 969896
 set fish_color_command c397d8
 set fish_color_comment e7c547
@@ -16,7 +14,6 @@ set fish_color_operator bryellow
 set fish_color_param 7aa6da
 set fish_color_quote b9ca4a
 set fish_color_redirection 70c0b1
-set fish_color_search_match bryellow\x1e\x2d\x2dbackground\x3dbrblack
 set fish_color_selection white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 set fish_color_user brgreen
 set fish_color_valid_path \x2d\x2dunderline

@@ -18,15 +18,32 @@ else
     # MacPorts
     set -xg PATH /opt/local/bin /opt/local/sbin $PATH
   end
-  if test -d ~/dev/sys-venvs/fish/bin
-    set -xg PATH $PATH ~/dev/sys-venvs/fish/bin
-  end
 
   function fish_title
     if test -n "$SSH_CLIENT" ;or test -n "$SSH_TTY"
       echo -sn (hostname -s) ": "
     end
     echo (prompt_pwd)
+  end
+
+  function python
+    echo "'python' command is not available; use a venv" 1>&2
+    return 1
+  end
+
+  function python3
+    echo "'python3' command is not available; use a venv" 1>&2
+    return 1
+  end
+
+  function pip
+    echo "'pip' command is not available; use a venv" 1>&2
+    return 1
+  end
+
+  function pip3
+    echo "'pip3' command is not available; use a venv" 1>&2
+    return 1
   end
 end
 
@@ -51,10 +68,6 @@ set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_color_branch yellow
 set __fish_git_prompt_color_upstream_ahead green
 set __fish_git_prompt_color_upstream_behind resh enad
-
-if type -q "hub"
-  alias git=hub
-end
 
 function fish_prompt
   set last_status $status
@@ -114,9 +127,9 @@ function vex
 
   # Use --wd within a virtual env to set a "home dir" for it.
 
-  if not type -f -q "vex"
-    echo "'vex' is missing."
-    echo "Make ~/dev/sys-venvs/fish venv and install vex there."
+  if not type -f -q "$HOME/dev/sys-venvs/fish/bin/vex"
+    echo "'vex' is missing." 1>&2
+    echo "Make ~/dev/sys-venvs/fish venv and install vex there." 1>&2
     return 1
   end
 
@@ -146,7 +159,8 @@ function vex
     end
   end
 
-  command vex $argv
+  set -l _vex_cmd "$HOME/dev/sys-venvs/fish/bin/vex"
+  eval $_vex_cmd $argv
   popd
   set -xg _VIRTUAL_ENV_HOME "$_OLD_VIRTUAL_ENV_HOME"
 end
