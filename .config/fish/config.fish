@@ -159,8 +159,7 @@ function vex
     end
   end
 
-  set -l _vex_cmd "$HOME/dev/sys-venvs/fish/bin/vex"
-  eval $_vex_cmd $argv
+  command "$HOME/dev/sys-venvs/fish/bin/vex" $argv
   popd
   set -xg _VIRTUAL_ENV_HOME "$_OLD_VIRTUAL_ENV_HOME"
 end
