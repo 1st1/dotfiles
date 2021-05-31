@@ -1,0 +1,31 @@
+# macOS-ifying Linux
+
+1. xkeysnail; config for it: dotfiles/etc/xkeysnail.py
+   (don't forget to patch it to not use X)
+
+2. logid; config for it: dotfiles/etc/logig.conf
+
+3. Superhuman: chrome browser extension; use the
+   "create shortcut" option to make it a standalone
+   app.
+
+4. tilix; the best iTerm2 replacement. No ebuild for it
+   yet, but it's easy to build manually.
+
+5. San Francisco font;
+   https://securitronlinux.com/debian-testing/install-mac-osx-fonts-on-linux-easily/
+
+6. `gsettings set org.gnome.mutter overlay-key ''`
+   to unbind the Super key from opening "Activities".
+   Rebind them to "Super-SPACE" via Settings / Shortcuts.
+
+7. Install Gnome Tweaks and use them for enabling
+   the Dark theme. Use them to also make the system
+   use the SF fonts.
+
+8. Some Gnome extensions to install:
+   * Custom hot corners
+   * Kstatusnotifieritem/appindicator
+   * Audio output switcher
+
+9. Install 1Password.
