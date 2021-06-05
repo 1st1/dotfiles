@@ -27,5 +27,12 @@
    * Custom hot corners
    * Kstatusnotifieritem/appindicator
    * Audio output switcher
+   * Dash to dock
 
 9. Install 1Password.
+
+10. Install Ulauncher with patches from
+    https://github.com/1st1/ulauncher/tree/activate
+
+11. Install GPaste.
+
