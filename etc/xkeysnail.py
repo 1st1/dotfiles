@@ -31,5 +31,7 @@ define_keymap(None, {
     K("Super-Shift-RIGHT"): K("Shift-END"),
     K("Super-Shift-P"): K("C-Shift-P"),
     K("Super-Shift-T"): K("C-Shift-T"),
+    K("Super-Shift-Z"): K("C-y"),
+    K("Super-M-i"): K("C-Shift-I"),
 })
 
