@@ -23,3 +23,6 @@ set backspace=indent,eol,start
 
 colorscheme eraz0r
 
+set backupdir=/tmp/
+set directory=/tmp/
+set undodir=/tmp/

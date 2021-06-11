@@ -40,3 +40,6 @@
 
 11. Install GPaste.
 
+12. Make sure the user is in the following groups:
+    lp wheel audio video input users portage kvm plugdev
+    lpadmin docker libvirt locate usb
